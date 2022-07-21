@@ -5,15 +5,15 @@ Install Elasticsearch and Kibana locally:
 	- Extract both .tar.gz files to desktop.
 	- Open terminal and CD into extracted Elasticsearch folder.
 	- Run bin/elasticsearch
+	- STOP!!! COPY AND PASTE THE AUTHENTICATION KEY AND ELASTIC PASSWORD IN A SEPARATE .TXT FILE.
 	- Open a new terminal and run:
 	- curl --cacert config/certs/http_ca.crt -u elastic https://localhost:9200
 		○ Run this if you need to change the password for user [elastic]:
 		○ bin/elasticsearch-reset-password -u elastic
 	- Enter the password and should get a successful ping to the node:
-	- 
 	- Then cd into kibana folder and run bin/kibana
 		○ Should show the localhost port and url
 		○ Go to that url in a browser
-	- To configure elastic you have to have an authentication key
+	- To configure elastic you have to have an authentication key which you saved earlier when running bin/elasticsearch
 		○ And then the verification key will show up in the kibana terminal
 	
