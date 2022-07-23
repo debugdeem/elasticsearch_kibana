@@ -1,0 +1,17 @@
+Precision = (True Positives)/(True Positives + False Positives)
+
+
+Recall = (True Positives)/(True Positives + False Negatives)
+
+Precision and Recall are inversely related.
+
+Precision wants all retrieved results to be a perfect match to the query, even if it means returning less documents.
+
+Recall wants to retrieve more results even if documents may not be a perfect match to the query.
+
+Ranking of results is based on score. What is score?
+	- The score is a value that represents how relevant a document is to that specific query
+	- A score is computed for each document that is a hit
+	- Term Frequency (TF): determines how many times each search term appears in a document.
+		○ If search terms are found in high frequency in a document, the document is considered more relevant to the search query.
+	- Inverse Document Frequency (IDF): diminishes the weight of terms that occur very frequently in the document set and increases the weight of terms that occur rarely.
