@@ -1,0 +1,37 @@
+Two main ways to search in Elasticsearch:
+	1. Queries: retrieve documents that match the specified criteria.
+	2. Aggregations: present the summary of your data as metrics, statistics, and other analytics.
+
+
+Bool queries using boolean combinations of other queries.
+Four clauses:
+	1. must
+	2. must_not
+	3. should
+	4. filter
+	
+Build combinations of one or more of these clauses. Clauses are optional and can be mixed and matched. Order of the causes does not matter.
+
+Syntax:
+
+GET name_of_index/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {One or more queries can be specified here. A document MUST match all of these queries to be considered as a hit.}
+      ],
+      "must_not": [
+        {A document must NOT match any of the queries specified here. It it does, it is excluded from the search results.}
+      ],
+      "should": [
+        {A document does not have to match any queries specified here. However, it if it does match, this document is given a higher score.}
+      ],
+      "filter": [
+        {These filters(queries) place documents in either yes or no category. Ones that fall into the yes category are included in the hits. }
+      ]
+    }
+  }
+}
+
+

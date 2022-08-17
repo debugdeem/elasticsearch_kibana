@@ -17,3 +17,20 @@ Install Elasticsearch and Kibana locally:
 	- To configure elastic you have to have an authentication key which you saved earlier when running bin/elasticsearch
 		○ And then the verification key will show up in the kibana terminal
 	
+
+
+How to get health of cluster and nodes :
+	- GET _cluster/health
+	- GET _nodes/stats
+
+Resolve "Kibana is not ready yet" issue by
+	1. commenting out 
+		○ xpack.security.enabled: true
+		○ xpack.security.enrollment.enabled: true
+	- from elasticsearch.yml
+	2. make sure 
+		○ that network.host: localhost is set in elasticsearch.yml
+		○ that "http://localhost:9200" is set in kibana.yml
+
+Solution from:
+https://linuxhint.com/kibana-server-not-ready-yet/

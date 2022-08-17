@@ -3,6 +3,8 @@ Precision = (True Positives)/(True Positives + False Positives)
 
 Recall = (True Positives)/(True Positives + False Negatives)
 
+
+
 Precision and Recall are inversely related.
 
 Precision wants all retrieved results to be a perfect match to the query, even if it means returning less documents.

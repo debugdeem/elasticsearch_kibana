@@ -1,0 +1,145 @@
+
+There are two main ways to search in Elasticsearch:
+	1. Queries retrieve documents that match the specified criteria.
+		
+	2. Aggregations present the summary of your data as metrics, statistics, and other analytics.
+
+
+First we need to set up the data properly:
+
+STEP 1:
+
+PUT ecommerce_data
+{
+  "mappings": {
+    "properties": {
+      "Country": {
+        "type": "keyword"
+      },
+      "CustomerID": {
+        "type": "long"
+      },
+      "Description": {
+        "type": "text"
+      },
+      "InvoiceDate": {
+        "type": "date",
+        "format": "M/d/yyyy H:m"
+      },
+      "InvoiceNo": {
+        "type": "keyword"
+      },
+      "Quantity": {
+        "type": "long"
+      },
+      "StockCode": {
+        "type": "keyword"
+      },
+      "UnitPrice": {
+        "type": "double"
+      }
+    }
+  }
+}
+
+
+
+STEP 2:
+POST _reindex
+{
+  "source": {
+    "index": "name of your original index when you added the data to Elasticsearch"
+  },
+  "dest": {
+    "index": "ecommerce_data"
+  }
+}
+
+
+STEP 3:
+POST ecommerce_data/_delete_by_query
+{
+  "query": {
+    "range": {
+      "UnitPrice": {
+        "lte": 0
+      }
+    }
+  }
+}
+
+
+STEP 4:
+POST ecommerce_data/_delete_by_query
+{
+  "query": {
+    "range": {
+      "UnitPrice": {
+        "gte": 500
+      }
+    }
+  }
+}
+
+
+
+
+Now we can create aggregations:
+	
+Syntax:
+GET Enter_name_of_the_index_here/_search
+{
+  "aggs": {
+    "Name your aggregations here": {
+      "sum": {
+        "field": "Name the field you want to aggregate on here"
+      }
+    }
+  }
+}
+
+
+
+Example: 
+GET ecommerce_data/_search
+{
+  "size": 0,
+  "aggs": {
+    "sum_unit_price": {
+      "sum": {
+        "field": "UnitPrice"
+      }
+    }
+  }
+}
+
+
+
+Compute the lowest (min) unit price of an item:
+GET Enter_name_of_the_index_here/_search
+{
+  "size": 0,
+  "aggs": {
+    "Name your aggregations here": {
+      "min": {
+        "field": "Name the field you want to aggregate on here"
+      }
+    }
+  }
+}
+
+Example:
+GET ecommerce_data/_search
+{
+  "size": 0,
+  "aggs": {
+    "lowest_unit_price": {
+      "min": {
+        "field": "UnitPrice"
+      }
+    }
+  }
+}
+
+
+size: 0 removes the top 10 from the list
